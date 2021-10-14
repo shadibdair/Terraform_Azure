@@ -1,3 +1,5 @@
+# Author Shadi Badir
+
 # Terraform Block
 terraform {
   # Specifies which versions of Terraform can be used with your configuration
