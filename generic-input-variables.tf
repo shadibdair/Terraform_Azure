@@ -1,6 +1,13 @@
 # Author Shadi Badir
 
 # Generic Input Variables
+# Author
+variable "author" {
+  description = "This Infrastructure belongs to shadi badir"
+  type = string
+  default = "shadi"
+}
+
 # Environment Variable
 variable "environment" {
   description = "Environment Variable used as a prefix"
