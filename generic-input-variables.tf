@@ -7,3 +7,10 @@ variable "environment" {
   type = string
   default = "preprod"
 }
+
+# Azure Resource Group Name 
+variable "resource_group_name" {
+  description = "Resource Group Name"
+  type = string
+  default = "rg"  
+}
