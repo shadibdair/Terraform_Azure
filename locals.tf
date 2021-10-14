@@ -1,3 +1,5 @@
+# Author Shadi Badir
+
 # Define Local Values in Terraform
 locals {
   owners = var.author
