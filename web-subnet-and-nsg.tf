@@ -1,3 +1,6 @@
+# Author Shadi Badir
+
+
 # Resource 1: Create WebTier Subnet
 resource "azurerm_subnet" "websubnet" {
   name                 = "${azurerm_virtual_network.vnet.name}-${var.web_subnet_name}"
