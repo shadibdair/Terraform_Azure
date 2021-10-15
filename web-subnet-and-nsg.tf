@@ -19,3 +19,13 @@ resource "azurerm_subnet_network_security_group_association" "web_subnet_nsg_ass
   subnet_id                 = azurerm_subnet.websubnet.id
   network_security_group_id = azurerm_network_security_group.web_subnet_nsg.id
 }
+
+# Resource 4: Create NSG Rules
+## Locals Block for Security Rules
+locals {
+  web_inbound_ports_map = {
+    # If the key starts with a number, you must use the colon syntax ":" instead of "="
+    "3000" : "8080",
+    "3010" : "22"
+  } 
+}
