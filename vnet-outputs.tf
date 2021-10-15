@@ -11,3 +11,15 @@ output "virtual_network_id" {
   description = "Virtual Network ID"
   value = azurerm_virtual_network.vnet.id
 }
+
+## Subnet Name 
+output "web_subnet_name" {
+  description = "WebTier Subnet Name"
+  value = azurerm_subnet.websubnet.name
+}
+
+## Subnet ID 
+output "web_subnet_id" {
+  description = "WebTier Subnet ID"
+  value = azurerm_subnet.websubnet.id
+}
