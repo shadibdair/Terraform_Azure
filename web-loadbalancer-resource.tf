@@ -37,3 +37,16 @@ resource "azurerm_lb_probe" "web_lb_probe" {
   loadbalancer_id     = azurerm_lb.web_lb.id
   resource_group_name = azurerm_resource_group.rg.name
 }
+
+# Resource-5: Create LB Rule
+resource "azurerm_lb_rule" "web_lb_rule_app1" {
+  name                           = "web-app1-rule"
+  protocol                       = "Tcp"
+  frontend_port                  = 8080
+  backend_port                   = 8080
+  frontend_ip_configuration_name = azurerm_lb.web_lb.frontend_ip_configuration[0].name
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.web_lb_backend_address_pool.id 
+  probe_id                       = azurerm_lb_probe.web_lb_probe.id
+  loadbalancer_id                = azurerm_lb.web_lb.id
+  resource_group_name            = azurerm_resource_group.rg.name
+}
