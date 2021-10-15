@@ -14,3 +14,11 @@ resource "azurerm_lb_nat_rule" "web_lb_inbound_nat_rule_22" {
   resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id = azurerm_lb.web_lb.id
 }
+
+# Associate LB NAT Rule and VM Network Interface
+resource "azurerm_network_interface_nat_rule_association" "web_nic_nat_rule_associate" {
+  count = var.web_linuxvm_instance_count
+  network_interface_id  = element(azurerm_network_interface.web_linuxvm_nic[*].id, count.index) 
+  ip_configuration_name = element(azurerm_network_interface.web_linuxvm_nic[*].ip_configuration[0].name, count.index) 
+  nat_rule_id           = element(azurerm_lb_nat_rule.web_lb_inbound_nat_rule_22[*].id, count.index)
+}
