@@ -28,3 +28,12 @@ resource "azurerm_lb_backend_address_pool" "web_lb_backend_address_pool" {
   name                = "web-backend"
   loadbalancer_id     = azurerm_lb.web_lb.id
 }
+
+# Resource-4: Create LB Probe
+resource "azurerm_lb_probe" "web_lb_probe" {
+  name                = "tcp-probe"
+  protocol            = "Tcp"
+  port                = 8080
+  loadbalancer_id     = azurerm_lb.web_lb.id
+  resource_group_name = azurerm_resource_group.rg.name
+}
