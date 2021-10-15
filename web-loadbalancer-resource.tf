@@ -22,3 +22,9 @@ resource "azurerm_lb" "web_lb" {
     public_ip_address_id = azurerm_public_ip.web_lbpublicip.id
   }
 }
+
+# Resource-3: Create LB Backend Pool
+resource "azurerm_lb_backend_address_pool" "web_lb_backend_address_pool" {
+  name                = "web-backend"
+  loadbalancer_id     = azurerm_lb.web_lb.id
+}
