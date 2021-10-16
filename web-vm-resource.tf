@@ -7,19 +7,18 @@ webvm_custom_data = <<CUSTOM_DATA
 #!/bin/sh
 sudo apt update && sudo apt full-upgrade -y
 sudo apt install docker.io -y
-
 CUSTOM_DATA  
 }
 
 # Resource: Azure Linux Virtual Machine
 resource "azurerm_linux_virtual_machine" "web_linuxvm" {
-  count = var.web_linuxvm_instance_count
-  name = "${local.resource_name_prefix}-web-linuxvm-${count.index}"
+  for_each = var.web_linuxvm_instance_count
+  name = "${local.resource_name_prefix}-web-linuxvm-${each.key}"
   resource_group_name = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
   size = "Standard_B1s"
   admin_username = "azureuser"
-  network_interface_ids = [ element(azurerm_network_interface.web_linuxvm_nic[*].id, count.index) ]
+  network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic[each.key].id ]
   os_profile {
     admin_username = "web-server-usr"
     admin_password = "Shadishadi1"
