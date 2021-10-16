@@ -17,22 +17,20 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   resource_group_name = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
   size = "Standard_B1s"
-  admin_username = "azureuser"
+  disable_password_authentication = "false"
+  admin_username = "web-server-${each.key}"
+  admin_password = "Shadishadi1"
   network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic[each.key].id ]
-  os_profile {
-    admin_username = "web-server-usr"
-    admin_password = "Shadishadi1"
-  }
+
   os_disk {
-    name = "myosdisk1"
     # Specifies the caching requirements for the OS disk
     caching = "ReadWrite"
-    storage_account_type = "Standard_HDD"
+    storage_account_type = "Standard_LRS"
   }
   source_image_reference {
     publisher = "Canonical"
     offer = "UbuntuServer"
-    sku = "20.04-LTS-Gen1"
+    sku = "18.04-LTS"
     version = "latest"
   }
   #custom_data = filebase64("${path.module}/app-scripts/redhat-webvm-script.sh")    
