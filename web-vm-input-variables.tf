@@ -8,6 +8,7 @@ variable "web_linuxvm_instance_count" {
   type = map(string)
   default = {
     "vm1" = "1022",
-    "vm2" = "2022"
+    "vm2" = "2022",
+    "vm3" = "3022"
   }
 }
