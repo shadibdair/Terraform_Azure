@@ -1,34 +1,43 @@
 # Author Shadi Badir
 
 
-# Network Interface Outputs
-## Network Interface ID
-output "web_linuxvm_network_interface_id" {
-  description = "Web Linux VM Network Interface ID"
-  # [*] This mean a List item
-  value = azurerm_network_interface.web_linuxvm_nic[*].id
-}
-## Network Interface Private IP Addresses
-output "web_linuxvm_network_interface_private_ip_addresses" {
-  description = "Web Linux VM Private IP Addresses"
-  value = [azurerm_network_interface.web_linuxvm_nic[*].private_ip_addresses]
+# Output List - Single Input to for loop
+output "web_linuxvm_private_ip_address_list" {
+  description = "Web Linux Virtual Machine Private IP"
+  # 1 Way 
+  value = [for vm in azurerm_linux_virtual_machine.web_linuxvm: vm.private_ip_address]
 }
 
-## Virtual Machine Private IP
-output "web_linuxvm_private_ip_address" {
+# Output Map  - Single Input to for loop
+output "web_linuxvm_private_ip_address_map" {
   description = "Web Linux Virtual Machine Private IP"
-  value = azurerm_linux_virtual_machine.web_linuxvm[*].private_ip_address
+  # 2 Way
+  value = {for vm in azurerm_linux_virtual_machine.web_linuxvm: vm.name => vm.private_ip_address}
 }
-## Virtual Machine 128-bit ID
-output "web_linuxvm_virtual_machine_id_128bit" {
-  description = "Web Linux Virtual Machine ID - 128-bit identifier"
-  value = azurerm_linux_virtual_machine.web_linuxvm[*].virtual_machine_id
+
+# Terraform keys() function: keys takes a map and returns a list containing the keys from that map.
+output "web_linuxvm_private_ip_address_keys_function" {
+  description = "Web Linux Virtual Machine Private IP"
+  value = keys({for vm in azurerm_linux_virtual_machine.web_linuxvm: vm.name => vm.private_ip_address})
 }
-## Virtual Machine ID
-output "web_linuxvm_virtual_machine_id" {
-  description = "Web Linux Virtual Machine ID "
-  value = azurerm_linux_virtual_machine.web_linuxvm[*].id
+# Terraform values() function: values takes a map and returns a list containing the values of the elements in that map.
+output "web_linuxvm_private_ip_address_values_function" {
+  description = "Web Linux Virtual Machine Private IP"
+  value = values({for vm in azurerm_linux_virtual_machine.web_linuxvm: vm.name => vm.private_ip_address})
 }
+
+# Output List - Two Inputs to for loop (here vm is Iterator like "i")
+output "web_linuxvm_network_interface_id_list" {
+  description = "Web Linux VM Network Interface ID"
+  value = [for vm, nic in azurerm_network_interface.web_linuxvm_nic: nic.id ]
+}
+
+# Output Map  - Two Inputs to for loop (here vm is Iterator like "i")
+output "web_linuxvm_network_interface_id_map" {
+  description = "Web Linux VM Network Interface ID"
+  value = {for vm, nic in azurerm_network_interface.web_linuxvm_nic: vm => nic.id }
+}
+
 
 
 
