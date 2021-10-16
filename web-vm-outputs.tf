@@ -38,7 +38,18 @@ output "web_linuxvm_network_interface_id_map" {
   value = {for vm, nic in azurerm_network_interface.web_linuxvm_nic: vm => nic.id }
 }
 
+# Output Admin web VM's
+output "web_Admin_vm" {
+  description = "Web Linux VM Admin"
+  value = [for vm in azurerm_linux_virtual_machine.web_linuxvm: vm.admin_username]
+}
 
+# Output Password web VM's
+output "web_Password_vm" {
+  description = "Web Linux VM Password"
+  sensitive   = true
+  value = [for vm in azurerm_linux_virtual_machine.web_linuxvm: vm.admin_password]
+}
 
 
 
