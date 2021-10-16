@@ -49,7 +49,7 @@ resource "azurerm_network_security_rule" "db_nsg_rule_inbound" {
 }
 
 ## NSG Outbound Rule for DBTier Subnets
-resource "azurerm_network_security_rule" "db_nsg_rule_inbound" {
+resource "azurerm_network_security_rule" "db_nsg_rule_outbound" {
   for_each = local.db_inbound_ports_map
   name                        = "DenyInternet"
   priority                    = "1000"
