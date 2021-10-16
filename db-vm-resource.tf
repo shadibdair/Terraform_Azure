@@ -11,30 +11,29 @@ CUSTOM_DATA
 }
 
 # Resource: Azure Linux Virtual Machine
-resource "azurerm_virtual_machine" "db_linuxvm" {
+resource "azurerm_linux_virtual_machine" "db_linuxvm" {
   name = "${local.resource_name_prefix}-db-linuxvm"
   resource_group_name = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
   size = "Standard_B1s"
-  admin_username = "azureuser-db"
-  network_interface_ids = azurerm_network_interface.db_linuxvm_nic.id
-  os_profile {
-    admin_username = "db-server-usr"
-    admin_password = "Shadishadi1"
-  }
+  disable_password_authentication = "false"
+  admin_username = "db-server-usr"
+  admin_password = "Shadishadi1"
+  network_interface_ids = [ azurerm_network_interface.db_linuxvm_nic.id ]
+  # network_interface_ids = azurerm_network_interface.db_linuxvm_nic.ip_configuration
+
   os_disk {
-    name = "myosdisk1"
+    name = "DBosdisk1"
     # Specifies the caching requirements for the OS disk
     caching = "ReadWrite"
-    storage_account_type = "Standard_HDD"
+    storage_account_type = "Standard_LRS"
   }
   source_image_reference {
     publisher = "Canonical"
     offer = "UbuntuServer"
-    sku = "20.04-LTS-Gen1"
+    sku = "18.04-LTS"
     version = "latest"
   }
-  #custom_data = filebase64("${path.module}/app-scripts/redhat-webvm-script.sh")    
   custom_data = base64encode(local.dbvm_custom_data)  
 
 }
