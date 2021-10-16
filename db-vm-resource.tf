@@ -17,7 +17,7 @@ resource "azurerm_virtual_machine" "db_linuxvm" {
   location = azurerm_resource_group.rg.location
   size = "Standard_B1s"
   admin_username = "azureuser-db"
-  network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic[each.key].id ]
+  network_interface_ids = azurerm_network_interface.db_linuxvm_nic.id
   os_profile {
     admin_username = "db-server-usr"
     admin_password = "Shadishadi1"
