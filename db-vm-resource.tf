@@ -3,7 +3,7 @@
 
 # Locals Block for custom data
 locals {
-webvm_custom_data = <<CUSTOM_DATA
+dbvm_custom_data = <<CUSTOM_DATA
 #!/bin/sh
 sudo apt update && sudo apt full-upgrade -y
 sudo apt install docker.io -y
@@ -35,6 +35,6 @@ resource "azurerm_virtual_machine" "db_linuxvm" {
     version = "latest"
   }
   #custom_data = filebase64("${path.module}/app-scripts/redhat-webvm-script.sh")    
-  custom_data = base64encode(local.webvm_custom_data)  
+  custom_data = base64encode(local.dbvm_custom_data)  
 
 }
