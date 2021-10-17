@@ -11,6 +11,14 @@ terraform {
       version = ">= 2.0" 
     }
   }
+
+  # Terraform State Storage to Azure Storage Container
+  backend "azurerm" {
+    resource_group_name   = "storage-bonus"
+    storage_account_name  = "storagestatebonus"
+    container_name        = "tfstatefiles"
+    key                   = "westus-terraform.tfstate"
+  } 
 }
 
 # Provider Block
