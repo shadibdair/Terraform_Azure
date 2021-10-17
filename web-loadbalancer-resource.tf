@@ -3,7 +3,7 @@
 
 # Resource-1: Create Public IP Address for Azure Load Balancer
 resource "azurerm_public_ip" "web_lbpublicip" {
-  name                = "${local.resource_name_prefix}-lbpublicip-bonus"
+  name                = "${local.resource_name_prefix}-lbpublicip-advanced"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
@@ -13,25 +13,25 @@ resource "azurerm_public_ip" "web_lbpublicip" {
 
 # Resource-2: Create Azure Standard Load Balancer
 resource "azurerm_lb" "web_lb" {
-  name                = "${local.resource_name_prefix}-web-lb-bonus"
+  name                = "${local.resource_name_prefix}-web-lb-advanced"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   sku = "Standard"
   frontend_ip_configuration {
-    name                 = "web-lb-publicip-1-bonus"
+    name                 = "web-lb-publicip-1-advanced"
     public_ip_address_id = azurerm_public_ip.web_lbpublicip.id
   }
 }
 
 # Resource-3: Create LB Backend Pool
 resource "azurerm_lb_backend_address_pool" "web_lb_backend_address_pool" {
-  name                = "web-backend-bonus"
+  name                = "web-backend-advanced"
   loadbalancer_id     = azurerm_lb.web_lb.id
 }
 
 # Resource-4: Create LB Probe
 resource "azurerm_lb_probe" "web_lb_probe" {
-  name                = "tcp-probe-bonus"
+  name                = "tcp-probe-advanced"
   protocol            = "Tcp"
   port                = 8080
   loadbalancer_id     = azurerm_lb.web_lb.id
@@ -40,7 +40,7 @@ resource "azurerm_lb_probe" "web_lb_probe" {
 
 # Resource-5: Create LB Rule
 resource "azurerm_lb_rule" "web_lb_rule_app1" {
-  name                           = "web-app1-rule-bonus"
+  name                           = "web-app1-rule-advanced"
   protocol                       = "Tcp"
   frontend_port                  = 8080
   backend_port                   = 8080
