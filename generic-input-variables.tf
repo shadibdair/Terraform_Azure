@@ -12,7 +12,7 @@ variable "author" {
 variable "environment" {
   description = "Environment Variable used as a prefix"
   type = string
-  default = "prod"
+  default = "advanced"
 }
 
 # Azure Resource Group Name 

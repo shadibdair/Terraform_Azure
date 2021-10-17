@@ -15,11 +15,11 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_linuxvm" {
     name = "${local.resource_name_prefix}-web-vmss"
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
-    size = "Standard_B1s"
+    sku = "Standard"
     disable_password_authentication = "false"
-    admin_username = "web-server-bonus"
+    admin_username = "web-server-bonus-advanced"
     admin_password = "Shadishadi1"
-    instances = 2
+    instances = 3
 
   os_disk {
     # Specifies the caching requirements for the OS disk
