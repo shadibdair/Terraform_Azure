@@ -57,4 +57,4 @@ resource "azurerm_lb_rule" "web_lb_rule_app1" {
 #   network_interface_id    = azurerm_network_interface.web_linuxvm_nic[each.key].id
 #   ip_configuration_name   = azurerm_network_interface.web_linuxvm_nic[each.key].ip_configuration[0].name
 #   backend_address_pool_id = azurerm_lb_backend_address_pool.web_lb_backend_address_pool.id
-}
+#}
