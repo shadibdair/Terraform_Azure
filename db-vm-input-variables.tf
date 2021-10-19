@@ -21,7 +21,7 @@
 #   sensitive   = true
 # }
 
-# # DB Schema Name
+# # DB Schema Nam
 # variable "postgress_db_schema" {
 #   description = "Azure MySQL Database Schema Name"
 #   type        = string
