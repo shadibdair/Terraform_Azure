@@ -19,11 +19,11 @@ resource "azurerm_postgresql_server" "db_postgress" {
   #ssl_minimal_tls_version_enforced = "TLS1_2"
 }
 
-# Resource: Azure MySQL Firewall Rule 
-resource "azurerm_mysql_firewall_rule" "mysql_fw_rule" {
-  name                = "allow-access-from--publicip"
-  resource_group_name = azurerm_resource_group.rg.name
-  server_name         = azurerm_mysql_server.mysql_server.name
-  start_ip_address    = azurerm_public_ip.web_lbpublicip.ip_address
-  end_ip_address      = azurerm_public_ip.web_lbpublicip.ip_address
-}
+# # Resource: Azure MySQL Firewall Rule 
+# resource "azurerm_mysql_firewall_rule" "mysql_fw_rule" {
+#   name                = "allow-access-from--publicip"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   server_name         = azurerm_mysql_server.mysql_server.name
+#   start_ip_address    = azurerm_public_ip.web_lbpublicip.ip_address
+#   end_ip_address      = azurerm_public_ip.web_lbpublicip.ip_address
+# }
