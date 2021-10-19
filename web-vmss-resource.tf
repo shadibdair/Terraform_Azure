@@ -12,12 +12,12 @@ CUSTOM_DATA
 
 # Resource: Azure Linux Virtual Machine
 resource "azurerm_linux_virtual_machine_scale_set" "web_linuxvm" {
-    name = "${local.resource_name_prefix}-web-vmss"
+    name = "${local.resource_name_prefix}-web-vmss-namevm"
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
-    sku = "Standard"
+    sku = "Standard_F2"
     disable_password_authentication = "false"
-    admin_username = "web-server-bonus-advanced"
+    admin_username = "web-server--advanced"
     admin_password = "Shadishadi1"
     instances = 3
 
